@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты анализа</title>
+</head>
+<body>
+    <h1>Top 50 слов по IDF</h1>
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Слово</th>
+                <th>TF</th>
+                <th>IDF</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in words %}
+            <tr>
+                <td>{{ item.word }}</td>
+                <td>{{ "%.4f"|format(item.tf) }}</td>
+                <td>{{ "%.4f"|format(item.idf) }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <p>Страница {{ page }} из {{ pages }}</p>
+        <div class="pagination">
+            {% for p in range(1, pages + 1) %}
+                <a href="/results?page={{ p }}&session_id={{ session_id }}" 
+                   class="{% if p == page %}active{% endif %}">
+                    {{ p }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
